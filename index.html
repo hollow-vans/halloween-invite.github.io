@@ -335,8 +335,6 @@
 	<div class="divider"></div>
 
 	<!--Team Reveal-->
-	<div class="subheader-grey">Team Revealed October 1st</div>
-	<div class="countdown-timer display" id="countdown">00d 00h 00m 00s</div>
 	<div class="team-name display" id="teamName"></div>
     <ul id="roster" class="reveal-list"></ul>
 
@@ -348,6 +346,14 @@
     <ul id="movieList" class="reveal-list"></ul>
 
 	<div class="newline"></div>
+
+    <!--Games Reveal-->
+	<div class="subheader-grey">Games Revealed October 17th</div>
+	<div class="countdown-timer display" id="countdown">00d 00h 00m 00s</div>
+	<div class="guest-name display">Game 1</div>
+	<div class="guest-name display">Game 2</div>
+	<div class="guest-name display">Game 3</div>
+    <div class="guest-name display">Movie Trivia</div>
 
 	<!--Bonus Points-->
 	<div class="team-name display">*Bonus Points*</div>
@@ -393,7 +399,7 @@
 	"6506": { name: "Nathalie", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
 	"5265": { name: "Luis", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
 	"8648": { name: "Alex", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
-	"4728": { name: "Selena", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
+	"4728": { name: "Selina", team: " The Black Cats ", roster: ["Selina,"Amber","Diego","Jamil","Dennis"] },
 	"8339": { name: "Lily", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
 	"4635": { name: "Iris", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
 	"5610": { name: "Gaby", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
@@ -406,7 +412,14 @@
 	"9919": { name: "Yvonne", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
 	"6543": { name: "Ricky", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
 	"9969": { name: "Nau", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
-	"3213": { name: "Michelle", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] }
+	"3213": { name: "Michelle", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
+	"2237": { name: "Amber", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
+	"5348": { name: "Israel", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
+	"4982": { name: "Javier", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
+	"7288": { name: "Ivonne", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
+	"2661": { name: "Dahlia", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
+	"3328": { name: "Marlea", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] },
+	"3369": { name: "John", team: " Team Name", roster: ["Guest One","Guest Two","Guest Three","Guest Four","Guest Five","Guest Six"] }
 	};
 	/* ============================================================ */
 
@@ -450,11 +463,18 @@
 	});
 
 	/*---------------- live countdown to October 1st ---------------- */
+	/*============================================================
 	function getOctoberFirst(){
 	const now = new Date();
 	return new Date(now.getFullYear(), 9, 1, 0, 0, 0); // Month is 0-indexed (9 = October)
 	}
-
+	============================================================ */
+	
+	/*---------------- live countdown to October 17th ---------------- */
+	function getOctoberSeventeen(){
+	const now = new Date();
+	return new Date(now.getFullYear(), 9, 1, 0, 0, 0); // Month is 0-indexed (9 = October)
+	}
 
 	/*---------------- live countdown to party date MIDNIGHT UPDATE ---------------- */
 	function getPartyDate(){
@@ -466,7 +486,7 @@
 
 	function tickCountdown(){
 	const el = document.getElementById('countdown');
-	const diff = getOctoberFirst() - new Date();
+	const diff = getOctoberSeventeen() - new Date();
 	if(diff <= 0){
 		el.textContent = "00d 00h 00m 00s";
 		return;
