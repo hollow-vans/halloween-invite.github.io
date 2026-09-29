@@ -306,6 +306,133 @@
 	.team-name.glitching::before,
 	.team-name.glitching::after{ display:none; }
 	}
+
+	/* ---------- GAMES LIST ---------- */
+	.game-list{
+	list-style:none;
+	display:flex;
+	flex-direction:column;
+	gap:14px;
+	margin-top:14px;
+	}
+	.game-link{
+	display:block;
+	width:100%;
+	background:none;
+	border:none;
+	padding:6px 0;
+	cursor:pointer;
+	/* font-size / color / weight come from .guest-name, font from .display */
+	transition:color 0.25s ease, letter-spacing 0.25s ease, text-shadow 0.25s ease, transform 0.25s ease;
+	}
+	.game-link:hover,
+	.game-link:focus-visible{
+	color:var(--gold-bright);
+	letter-spacing:0.08em;
+	text-shadow:0 0 16px rgba(240,207,125,0.35);
+	transform:translateY(-2px);
+	outline:none;
+	}
+
+	/* ---------- RULES PAGE ---------- */
+	#rules{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	z-index:3;
+	width:min(92vw, 460px);
+	max-height:88vh;
+	overflow-y:auto;
+	scrollbar-width:none;
+	-ms-overflow-style:none;
+	padding:4px 4px 24px;
+	text-align:center;
+	opacity:0;
+	pointer-events:none;
+	transition:opacity 0.8s ease;
+	}
+	#rules::-webkit-scrollbar{ display:none; }
+	#rules.active{ opacity:1; pointer-events:auto; }
+
+	.rules-list{
+	list-style:none;
+	counter-reset:rule;
+	text-align:left;
+	margin-bottom:28px;
+	}
+	.rules-list li{
+	counter-increment:rule;
+	position:relative;
+	padding:12px 0 12px 34px;
+	border-bottom:1px solid var(--grey);
+	font-size:0.95rem;
+	line-height:1.6;
+	color:var(--white);
+	opacity:0;
+	transform:translateY(10px);
+	transition:opacity 0.6s ease, transform 0.6s ease;
+	}
+	.rules-list li::before{
+	content:counter(rule);
+	position:absolute;
+	left:0;
+	top:12px;
+	font-family:'Oranienbaum', serif;
+	font-size:1.2rem;
+	color:var(--gold);
+	}
+	.rules-list li.shown{ opacity:1; transform:translateY(0); }
+
+	.back-btn{
+	background:none;
+	border:1px solid var(--gold);
+	color:var(--gold);
+	font-family:'Inter',sans-serif;
+	font-size:0.75rem;
+	letter-spacing:0.25em;
+	text-transform:uppercase;
+	padding:12px 30px;
+	cursor:pointer;
+	transition:background 0.25s ease, color 0.25s ease;
+	}
+	.back-btn:hover, .back-btn:focus-visible{
+	background:var(--gold);
+	color:var(--black);
+	outline:none;
+	}
+	#roster li.you{ color:var(--gold-bright); }
+	#roster li.you::after{
+	content:' — you';
+	font-family:'Inter',sans-serif;
+	font-size:0.75rem;
+	color:var(--gold);
+	letter-spacing:0.05em;
+	}
+
+	.theme-link{
+	display:inline-block;
+	color:var(--gold-bright);
+	font-family:'Oranienbaum', serif;
+	font-size:clamp(1.3rem, 4vw, 1.7rem);
+	letter-spacing:0.04em;
+	text-decoration:none;
+	border-bottom:1px solid var(--gold);
+	padding-bottom:2px;
+	transition:color 0.25s ease, border-color 0.25s ease;
+	}
+	.theme-link:hover{
+	color:var(--white);
+	border-color:var(--white-dim);
+	}
+
+	@media (prefers-reduced-motion: reduce){
+	.reveal-list li, .rules-list li{ transition:opacity 0.3s ease; transform:none; }
+	.team-name.glitching{ animation:none; }
+	.team-name.glitching::before,
+	.team-name.glitching::after{ display:none; }
+}
+	
 </style>
 </head>
 <body>
@@ -348,6 +475,10 @@
     <ul id="movieList" class="reveal-list"></ul>
 
 	<div class="newline"></div>
+	
+	<!--Game Reveal-->  
+	<div class="team-name display">Games</div>
+	<ul id="gameList" class="game-list"></ul>
 
 	<!--Bonus Points-->
 	<div class="team-name display">*Bonus Points*</div>
@@ -367,6 +498,15 @@
     <div class="newline"></div>
 
   </div>
+
+	<div id="rules">
+		<div class="subheader-grey">Game Rules</div>
+		<div class="team-name display" id="rulesTitle"></div>
+		<div class="divider"></div>
+		<ul id="rulesList" class="rules-list"></ul>
+		<button id="rulesBack" class="back-btn">Back</button>
+	</div>
+
 </div>
 
 <script>
@@ -387,7 +527,7 @@
 	"3939": { name: "Dennis", team: " The Black Cats", roster: ["Dennis","Amber","Diego","Jamil","Selina"] },
 	"7625": { name: "Marisol", team: " The Bloodhounds", roster: ["Marisol","Johnathan S","Juanito","Lily","Ricky"] },
 	"8339": { name: "Lily", team: " The Bloodhounds", roster: ["Lily","Johnathan S","Juanito","Marisol","Ricky"] },
-	"1355": { name: "Juanito", team: " The Bloodhounds", roster: ["Juanito","Johnathan S","Lily","Marisol","Ricky"] },
+	"1355": { name: "Juan", team: " The Bloodhounds", roster: ["Juanito","Johnathan S","Lily","Marisol","Ricky"] },
 	"3369": { name: "Johnathan S", team: " The Bloodhounds", roster: ["Johnathan S","Juanito","Lily","Marisol","Ricky"] },
 	"6543": { name: "Ricky", team: " The Bloodhounds", roster: ["Ricky","Johnathan S","Juanito","Lily","Marisol"] },
 	"1706": { name: "Evelyn", team: " The Dead Society", roster: ["Evelyn","Alex","Chel","Luis","Nathalie R","Xavier"] },
@@ -432,6 +572,60 @@
 
 	document.getElementById('sheetLink').href = SPREADSHEET_URL;
 	document.getElementById('rsvpLink').href = RSVP_URL;
+
+	/* ============================================================
+	EDIT: the games and their rules. "name" is the label guests
+	tap; "rules" is a list of rule lines shown on the rules page.
+	============================================================ */
+	const GAMES = [
+	{ name: "Game 1", rules: ["Rule one goes here.", "Rule two goes here.", "Rule three goes here."] },
+	{ name: "Game 2", rules: ["Rule one goes here.", "Rule two goes here.", "Rule three goes here."] },
+	{ name: "Game 3", rules: ["Rule one goes here.", "Rule two goes here.", "Rule three goes here."] }
+	];
+
+	const gameListEl = document.getElementById('gameList');
+	const rulesEl = document.getElementById('rules');
+	const rulesTitleEl = document.getElementById('rulesTitle');
+	const rulesListEl = document.getElementById('rulesList');
+	const rulesBackBtn = document.getElementById('rulesBack');
+
+	GAMES.forEach(game=>{
+	const li = document.createElement('li');
+	const btn = document.createElement('button');
+	btn.type = 'button';
+	btn.className = 'guest-name display game-link';
+	btn.textContent = game.name;
+	btn.addEventListener('click', ()=> openRules(game));
+	li.appendChild(btn);
+	gameListEl.appendChild(li);
+	});
+
+	function openRules(game){
+	document.getElementById('reveal').classList.remove('active');
+	rulesTitleEl.textContent = game.name;
+	rulesListEl.innerHTML = '';
+	game.rules.forEach(text=>{
+	const li = document.createElement('li');
+	li.textContent = text;
+	rulesListEl.appendChild(li);
+	});
+	rulesEl.scrollTop = 0;
+	setTimeout(()=>{
+	rulesEl.classList.add('active');
+	rulesListEl.querySelectorAll('li').forEach((li, i)=>{
+	setTimeout(()=> li.classList.add('shown'), 300 + i * 300);
+	});
+	}, 500);
+	}
+
+	rulesBackBtn.addEventListener('click', ()=>{
+	rulesEl.classList.remove('active');
+	setTimeout(()=> document.getElementById('reveal').classList.add('active'), 500);
+	});
+
+	/* ============================================================
+	Movie List for Trivia Night. Each movie has a title and an optional image.
+	============================================================ */
 
 	const movieListEl = document.getElementById('movieList');
 	TRIVIA_MOVIES.forEach(movie=>{
