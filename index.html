@@ -404,7 +404,7 @@
 	#roster li.you{ color:var(--gold-bright); }
 	#roster li.you::after{
 	content:' — you';
-	font-family:'Inter',sans-serif;
+	font-family:'Oranienbaum',sans-serif;
 	font-size:0.75rem;
 	color:var(--gold);
 	letter-spacing:0.05em;
@@ -431,8 +431,8 @@
 	.team-name.glitching{ animation:none; }
 	.team-name.glitching::before,
 	.team-name.glitching::after{ display:none; }
-}
-	
+	}
+
 </style>
 </head>
 <body>
@@ -451,44 +451,43 @@
   <div id="reveal">
     <div class="subheader-grey">Unlocked for</div>
     <div class="guest-name display" id="guestName"></div>
-
     <div class="team-name display">Halloween Party 2026</div>
 	<h1 class="guest-name display">Saturday, October 24th, 2026 | 6:00 PM</h1>
 	<div class="subheader-yellow">Bring Your Own Beer</div>
-	
-	<div class="divider"></div>
-	<a id="sheetLink" class="theme-link" href="#" target="_blank" rel="noopener">Potluck Sign Up</a>
-
-	<div class="divider"></div>
+	<div class="newline"></div>
+    <div class="newline"></div>
 
 	<!--Team Reveal-->
-	<div class="subheader-grey">Team Revealed October 1st</div>
-	<div class="countdown-timer display" id="countdown">00d 00h 00m 00s</div>
 	<div class="team-name display" id="teamName"></div>
     <ul id="roster" class="reveal-list"></ul>
-
-	<div class="divider"></div>
+	<div class="newline"></div>
+	<div class="newline"></div>
 
 	<!--Movie Trivia-->
 	<div class="team-name display">Trivia Movie List</div>
 	<div class="subheader-grey">Misfit Kids and Monsters</div>
     <ul id="movieList" class="reveal-list"></ul>
-
+	<div class="newline"></div>
 	<div class="newline"></div>
 	
-	<!--Game Reveal-->  
+	<!--Game Reveal-->
+	<div class="subheader-grey">Games Revealed October 17th</div>
+	<div class="countdown-timer display" id="countdown">00d 00h 00m 00s</div>
 	<div class="team-name display">Games</div>
 	<ul id="gameList" class="game-list"></ul>
+	<div class="newline"></div>
+	<div class="newline"></div>
 
 	<!--Bonus Points-->
 	<div class="team-name display">*Bonus Points*</div>
     
 	<div class="guest-name display">RSVP by Friday, September 25th, 2026</div>
 	<a id="rsvpLink" class="theme-link" href="#" target="_blank" rel="noopener">RSVP</a>
-	  <div class="newline"></div>
+	<div class="newline"></div>
 	
 	<div class="guest-name display">Bring Halloween Themed Potluck</div>
 	<div class="subheader-yellow">(minimal effort accepted)</div>
+	<a id="sheetLink" class="theme-link" href="#" target="_blank" rel="noopener">Potluck Sign Up</a>
 	<div class="newline"></div>
 	
 	<div class="guest-name display">Return your 'Admit One' ticket</div>
@@ -645,12 +644,17 @@
 	movieListEl.appendChild(li);
 	});
 
-	/*---------------- live countdown to October 1st ---------------- */
+	/*---------------- live countdown to October 1st Teams ---------------- */
 	function getOctoberFirst(){
 	const now = new Date();
 	return new Date(now.getFullYear(), 9, 1, 0, 0, 0); // Month is 0-indexed (9 = October)
 	}
 
+	/*---------------- live countdown to October 17th Games ---------------- */
+	function getOctoberSeventeen(){
+	const now = new Date();
+	return new Date(now.getFullYear(), 9, 17, 0, 0, 0); // Month is 0-indexed (9 = October)
+	}
 
 	/*---------------- live countdown to party date MIDNIGHT UPDATE ---------------- */
 	function getPartyDate(){
@@ -662,7 +666,7 @@
 
 	function tickCountdown(){
 	const el = document.getElementById('countdown');
-	const diff = getOctoberFirst() - new Date();
+	const diff = getOctoberSeventeen() - new Date();
 	if(diff <= 0){
 		el.textContent = "00d 00h 00m 00s";
 		return;
