@@ -383,7 +383,32 @@
 	color:var(--gold);
 	}
 	.rules-list li.shown{ opacity:1; transform:translateY(0); }
-
+	.points-list{
+	list-style:none;
+	text-align:left;
+	margin-bottom:28px;
+	}
+	
+	.points-list li{
+	padding:12px 0;
+	border-bottom:1px solid var(--grey);
+	opacity:0;
+	transform:translateY(10px);
+	transition:opacity 0.6s ease, transform 0.6s ease;
+	}
+	.points-list li.shown{ opacity:1; transform:translateY(0); }
+	.points-place{
+	font-family:'Oranienbaum', serif;
+	font-size:1.15rem;
+	color:var(--gold-bright);
+	margin-bottom:4px;
+	}
+	.points-desc{
+	font-size:0.9rem;
+	color:var(--white-dim);
+	line-height:1.5;
+	}
+	
 	.back-btn{
 	background:none;
 	border:1px solid var(--gold);
@@ -476,7 +501,6 @@
 	<div class="team-name display">Games</div>
 	<ul id="gameList" class="game-list"></ul>
 	<div class="newline"></div>
-	<div class="newline"></div>
 
 	<!--Bonus Points-->
 	<div class="team-name display">*Bonus Points*</div>
@@ -497,12 +521,16 @@
     <div class="newline"></div>
 
   </div>
+	
 
 	<div id="rules">
 		<div class="subheader-grey">Game Rules</div>
 		<div class="team-name display" id="rulesTitle"></div>
 		<div class="divider"></div>
 		<ul id="rulesList" class="rules-list"></ul>
+		<div class="divider"></div>
+		<div class="team-name display">Points</div>
+		<ul id="pointsList" class="points-list"></ul>
 		<button id="rulesBack" class="back-btn">Back</button>
 	</div>
 
@@ -577,9 +605,24 @@
 	tap; "rules" is a list of rule lines shown on the rules page.
 	============================================================ */
 	const GAMES = [
-	{ name: "Game 1", rules: ["Rule one goes here.", "Rule two goes here.", "Rule three goes here."] },
-	{ name: "Game 2", rules: ["Rule one goes here.", "Rule two goes here.", "Rule three goes here."] },
-	{ name: "Game 3", rules: ["Rule one goes here.", "Rule two goes here.", "Rule three goes here."] }
+	{ name: "Game 1", rules: ["Players are surrounding their assigned table. Bones are distributed on the table.", "Players walk around the table while the music plays.", "When the music stops, players must grab a bone from the table.", "Players who do not grab a bone are Eliminated.", "Two bones are removed from the table before the next round beings.","Repeat until last player standing."],
+	points: [
+	{ place: "1st Place", description: "100 points awarded to the winning team. An additional 50 points awarded to the individual player." },
+	{ place: "2nd Place", description: "75 points awarded to the winning team. An additional 50 points awarded to the individual player." },
+	{ place: "3rd Place", description: "50 points awarded to the winning team. An additional 25 points awarded to the individual player." }
+	] },
+	{ name: "Game 2", rules: ["Rule one goes here.", "Rule two goes here.", "Rule three goes here."],
+	points: [
+	{ place: "1st Place", description: "100 points awarded to the winning team. An additional 50 points awarded to the individual Mummy." },
+	{ place: "2nd Place", description: "75 points awarded to the winning team. An additional 50 points awarded to the individual Mummy." },
+	{ place: "3rd Place", description: "50 points awarded to the winning team. An additional 25 points awarded to the individual Mummy." }
+	] },
+	{ name: "Game 3", rules: ["Four corners are placed around the area.", "Players are given 10 seconds to choose a corner.", "A random corner is chosen as the Corner of Death.", "All players in the Corner of Death are Eliminated.", "Repeat until last player standing."],
+	points: [
+	{ place: "1st Place", description: "100 points awarded to the winning team. An additional 50 points awarded to the individual player." },
+	{ place: "2nd Place", description: "75 points awarded to the winning team. An additional 50 points awarded to the individual player." },
+	{ place: "3rd Place", description: "50 points awarded to the winning team. An additional 25 points awarded to the individual player." }
+	] }
 	];
 
 	const gameListEl = document.getElementById('gameList');
