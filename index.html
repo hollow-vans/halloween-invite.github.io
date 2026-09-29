@@ -640,7 +640,8 @@
 	btn.type = 'button';
 	btn.className = 'guest-name display game-link';
 	btn.textContent = game.name;
-	btn.addEventListener('click', ()=> openRules(game));
+	//Uncomment on October 17th to enable rules reveal***************
+	//btn.addEventListener('click', ()=> openRules(game));
 	li.appendChild(btn);
 	gameListEl.appendChild(li);
 	});
