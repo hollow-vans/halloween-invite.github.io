@@ -383,12 +383,12 @@
 	color:var(--gold);
 	}
 	.rules-list li.shown{ opacity:1; transform:translateY(0); }
+	
 	.points-list{
 	list-style:none;
 	text-align:left;
 	margin-bottom:28px;
 	}
-	
 	.points-list li{
 	padding:12px 0;
 	border-bottom:1px solid var(--grey);
@@ -603,6 +603,7 @@
 	/* ============================================================
 	EDIT: the games and their rules. "name" is the label guests
 	tap; "rules" is a list of rule lines shown on the rules page.
+	EDIT GAME # to the game name when ready to reveal.
 	============================================================ */
 	const GAMES = [
 	{ name: "Game 1", rules: ["Players are surrounding their assigned table. Bones are distributed on the table.", "Players walk around the table while the music plays.", "When the music stops, players must grab a bone from the table.", "Players who do not grab a bone are Eliminated.", "Two bones are removed from the table before the next round beings.","Repeat until last player standing."],
@@ -668,7 +669,8 @@
 	rulesEl.scrollTop = 0;
 	setTimeout(()=>{
 	rulesEl.classList.add('active');
-	rulesListEl.querySelectorAll('li').forEach((li, i)=>{
+	const ruleItems = rulesListEl.querySelectorAll('li');
+	ruleItems.forEach((li, i)=>{
 	setTimeout(()=> li.classList.add('shown'), 300 + i * 300);
 	});
 	const pointStart = 300 + ruleItems.length * 300 + 200;
