@@ -629,6 +629,7 @@
 	const rulesEl = document.getElementById('rules');
 	const rulesTitleEl = document.getElementById('rulesTitle');
 	const rulesListEl = document.getElementById('rulesList');
+	const pointsListEl = document.getElementById('pointsList');
 	const rulesBackBtn = document.getElementById('rulesBack');
 
 	GAMES.forEach(game=>{
@@ -651,11 +652,28 @@
 	li.textContent = text;
 	rulesListEl.appendChild(li);
 	});
+	pointsListEl.innerHTML = '';
+	game.points.forEach(p=>{
+	const li = document.createElement('li');
+	const place = document.createElement('div');
+	place.className = 'points-place';
+	place.textContent = p.place;
+	const desc = document.createElement('div');
+	desc.className = 'points-desc';
+	desc.textContent = p.description;
+	li.appendChild(place);
+	li.appendChild(desc);
+	pointsListEl.appendChild(li);
+	});
 	rulesEl.scrollTop = 0;
 	setTimeout(()=>{
 	rulesEl.classList.add('active');
 	rulesListEl.querySelectorAll('li').forEach((li, i)=>{
 	setTimeout(()=> li.classList.add('shown'), 300 + i * 300);
+	});
+	const pointStart = 300 + ruleItems.length * 300 + 200;
+	pointsListEl.querySelectorAll('li').forEach((li, i)=>{
+	setTimeout(()=> li.classList.add('shown'), pointStart + i * 300);
 	});
 	}, 500);
 	}
