@@ -48,6 +48,13 @@
 	pointer-events:none;
 	}
 
+	.struck{
+	text-decoration:line-through;
+	text-decoration-color:var(--gold);
+	text-decoration-thickness:2px;
+	opacity:0.5;
+	}
+
 	/* ---------- LOCK SCREEN ---------- */
 	#lock{
 	position:relative;
@@ -383,7 +390,7 @@
 	color:var(--gold);
 	}
 	.rules-list li.shown{ opacity:1; transform:translateY(0); }
-	
+
 	.points-list{
 	list-style:none;
 	text-align:left;
@@ -408,7 +415,7 @@
 	color:var(--white-dim);
 	line-height:1.5;
 	}
-	
+
 	.back-btn{
 	background:none;
 	border:1px solid var(--gold);
@@ -512,8 +519,8 @@
 	<!--Bonus Points-->
 	<div class="team-name display">*Bonus Points*</div>
     
-	<div class="guest-name display">RSVP by Friday, September 25th, 2026</div>
-	<a id="rsvpLink" class="theme-link" href="#" target="_blank" rel="noopener">RSVP</a>
+	<div class="guest-name display struck">RSVP by Friday, September 25th, 2026</div>
+	<a id="rsvpLink struck" class="theme-link" href="#" target="_blank" rel="noopener">RSVP</a>
 	<div class="newline"></div>
 	
 	<div class="guest-name display">Bring Halloween Themed Potluck</div>
