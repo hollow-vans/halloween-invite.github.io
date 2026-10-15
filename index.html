@@ -480,6 +480,7 @@
 	<h1 class="guest-name display">Saturday, October 24th, 2026 | 6:00 PM</h1>
 	<div class="subheader-yellow">Bring Your Own Beer</div>
 	<div class="newline"></div>
+    <div class="countdown-timer display" id="countdown">00d 00h 00m 00s</div>
 	<a id="sheetLink" class="theme-link" href="#" target="_blank" rel="noopener">Potluck Sign Up</a>
 	<div class="newline"></div>
     <div class="newline"></div>
@@ -496,11 +497,14 @@
     <ul id="movieList" class="reveal-list"></ul>
 	<div class="newline"></div>
 	<div class="newline"></div>
-	
+
 	<!--Game Reveal-->
-	<div class="subheader-grey">Games Revealed October 17th</div>
-	<div class="countdown-timer display" id="countdown">00d 00h 00m 00s</div>
-	<div class="team-name display">Games</div>
+	<a id="scoreboardLink" class="theme-link" href="#" target="_blank" rel="noopener">Scoreboard</a>
+	<div class="newline"></div>
+	  
+	<div class="team-name display">Team Games</div>
+    <div class="subheader-grey">Select Game to reveal Game Details</div>
+	
 	<ul id="gameList" class="game-list"></ul>
 	<div class="newline"></div>
 
@@ -588,6 +592,7 @@
 	============================================================ */
 	const SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1kW8hWA10BKXkQwlsXiq55qwD-PBtSUJ5NzBVbqKysrY/edit?usp=sharing";
 	const RSVP_URL = "https://forms.gle/bf6wso9T6ZJEYCvVA";
+	const SCOREBOARD_URL = "https://datastudio.google.com/u/0/reporting/44ae2629-af98-4be9-a498-48dddccfd6ff/page/9sq4F";
 
 	/* ============================================================
 	EDIT: the three movies for trivia night. Add an image file for each in the same folder as this HTML file.
@@ -601,6 +606,7 @@
 
 	document.getElementById('sheetLink').href = SPREADSHEET_URL;
 	document.getElementById('rsvpLink').href = RSVP_URL;
+	document.getElementById('scoreboardLink').href = SCOREBOARD_URL;
 
 	/* ============================================================
 	EDIT: the games and their rules. "name" is the label guests
@@ -608,23 +614,29 @@
 	EDIT GAME # to the game name when ready to reveal.
 	============================================================ */
 	const GAMES = [
-	{ name: "Game 1", rules: ["Players are surrounding their assigned table. Bones are distributed on the table.", "Players walk around the table while the music plays.", "When the music stops, players must grab a bone from the table.", "Players who do not grab a bone are Eliminated.", "Two bones are removed from the table before the next round beings.","Repeat until last player standing."],
+	{ name: "Bones", rules: ["Teams surround their assigned table. Bones are distributed on the table.", "Players walk around the table while the music plays.", "When the music stops, players must grab a bone from the table.", "Players who do not grab a bone are Eliminated.", "Two bones are removed from the table before the next round beings.","Repeat until last player standing."],
 	points: [
-	{ place: "1st Place", description: "100 points awarded to the winning team. An additional 50 points awarded to the individual player." },
-	{ place: "2nd Place", description: "75 points awarded to the winning team. An additional 50 points awarded to the individual player." },
-	{ place: "3rd Place", description: "50 points awarded to the winning team. An additional 25 points awarded to the individual player." }
+	{ place: "1st Place", description: "100 points awarded to the first winning team. An additional 50 points awarded to the individual player." },
+	{ place: "2nd Place", description: "75 points awarded to the second winning team. An additional 40 points awarded to the individual player." },
+	{ place: "3rd Place", description: "50 points awarded to the third winning team. An additional 30 points awarded to the individual player." }
 	] },
-	{ name: "Game 2", rules: ["Rule one goes here.", "Rule two goes here.", "Rule three goes here."],
+	{ name: "Mummy Walk", rules: ["3 teams begin Round 1. Each team must assign a player to be the Mummy.", "Teams are given 2 toilet paper rolls and 3 minutes to wrap their Mummy.", "Mummies must walk from the start to the finish line 'like a Mummy'.", "At the end of the walk, the standby teams select the winning Mummy.", "The standby teams select their Mummy to begin Round 2."],
 	points: [
-	{ place: "1st Place", description: "100 points awarded to the winning team. An additional 50 points awarded to the individual Mummy." },
-	{ place: "2nd Place", description: "75 points awarded to the winning team. An additional 50 points awarded to the individual Mummy." },
-	{ place: "3rd Place", description: "50 points awarded to the winning team. An additional 25 points awarded to the individual Mummy." }
+	{ place: "1st Place", description: "100 points awarded to the first winning team. An additional 50 points awarded to the individual Mummy." },
+	{ place: "2nd Place", description: "75 points awarded to the second winning team. An additional 40 points awarded to the individual Mummy." },
+	{ place: "3rd Place", description: "50 points awarded to the third winning team. An additional 30 points awarded to the individual Mummy." }
 	] },
-	{ name: "Game 3", rules: ["Four corners are placed around the area.", "Players are given 10 seconds to choose a corner.", "A random corner is chosen as the Corner of Death.", "All players in the Corner of Death are Eliminated.", "Repeat until last player standing."],
+	{ name: "Corner of Death", rules: ["Four corners are identified as 'Corners of Death'.", "Players are given 10 seconds to stand in a corner.", "A random corner is chosen as the Corner of Death.", "All players in the Corner of Death are Eliminated.", "Repeat until last player standing."],
 	points: [
-	{ place: "1st Place", description: "100 points awarded to the winning team. An additional 50 points awarded to the individual player." },
-	{ place: "2nd Place", description: "75 points awarded to the winning team. An additional 50 points awarded to the individual player." },
-	{ place: "3rd Place", description: "50 points awarded to the winning team. An additional 25 points awarded to the individual player." }
+	{ place: "1st Place", description: "100 points awarded to the first winning team. An additional 50 points awarded to the individual player." },
+	{ place: "2nd Place", description: "75 points awarded to the second winning team. An additional 40 points awarded to the individual player." },
+	{ place: "3rd Place", description: "50 points awarded to the third winning team. An additional 30 points awarded to the individual player." }
+	] },
+	{ name: "Movie Trivia", rules: ["Four corners are placed around the area.", "Players are given 10 seconds to choose a corner.", "A random corner is chosen as the Corner of Death.", "All players in the Corner of Death are Eliminated.", "Repeat until last player standing."],
+	points: [
+	{ place: "1st Place", description: "200 points awarded to the first winning team." },
+	{ place: "2nd Place", description: "150 points awarded to the second winning team." },
+	{ place: "3rd Place", description: "100 points awarded to the third winning team." }
 	] }
 	];
 
@@ -641,8 +653,7 @@
 	btn.type = 'button';
 	btn.className = 'guest-name display game-link';
 	btn.textContent = game.name;
-	//Uncomment on October 17th to enable rules reveal***************
-	//btn.addEventListener('click', ()=> openRules(game));
+	btn.addEventListener('click', ()=> openRules(game));
 	li.appendChild(btn);
 	gameListEl.appendChild(li);
 	});
@@ -732,7 +743,8 @@
 
 	function tickCountdown(){
 	const el = document.getElementById('countdown');
-	const diff = getOctoberSeventeen() - new Date();
+	/*------------------- countdown to PARTY DATE -- Update const diff -----------------*/
+	const diff = getPartyDate() - new Date();
 	if(diff <= 0){
 		el.textContent = "00d 00h 00m 00s";
 		return;
