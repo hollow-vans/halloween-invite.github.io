@@ -48,13 +48,6 @@
 	pointer-events:none;
 	}
 
-	.struck{
-	text-decoration:line-through;
-	text-decoration-color:var(--gold);
-	text-decoration-thickness:2px;
-	opacity:0.5;
-	}
-
 	/* ---------- LOCK SCREEN ---------- */
 	#lock{
 	position:relative;
@@ -498,6 +491,17 @@
 	<div class="newline"></div>
 	<div class="newline"></div>
 
+	<!--Game Reveal-->
+	<a id="scoreboardLink" class="theme-link" href="#" target="_blank" rel="noopener">Scoreboard</a>
+	<div class="newline"></div>
+
+	<div class="team-name display">Team Games</div>
+	<div class="subheader-grey">Select Game to reveal Game Details</div>
+	<div class="newline"></div>
+
+	<ul id="gameList" class="game-list"></ul>
+	<div class="newline"></div>
+	  
 	<!--Movie Trivia-->
 	<div class="team-name display">Trivia Movie List</div>
 	<div class="subheader-grey">Misfit Kids and Monsters</div>
@@ -505,22 +509,11 @@
 	<div class="newline"></div>
 	<div class="newline"></div>
 
-	<!--Game Reveal-->
-	<a id="scoreboardLink" class="theme-link" href="#" target="_blank" rel="noopener">Scoreboard</a>
-	<div class="newline"></div>
-	  
-	<div class="team-name display">Team Games</div>
-    <div class="subheader-grey">Select Game to reveal Game Details</div>
-	<div class="newline"></div>
-	
-	<ul id="gameList" class="game-list"></ul>
-	<div class="newline"></div>
-
 	<!--Bonus Points-->
 	<div class="team-name display">*Bonus Points*</div>
     
-	<div class="guest-name display struck">RSVP by Friday, September 25th, 2026</div>
-	<a id="rsvpLink struck" class="theme-link" href="#" target="_blank" rel="noopener">RSVP</a>
+	<div class="guest-name display">RSVP by Friday, September 25th, 2026</div>
+	<a id="rsvpLink" class="theme-link" href="#" target="_blank" rel="noopener">RSVP</a>
 	<div class="newline"></div>
 	
 	<div class="guest-name display">Bring Halloween Themed Potluck</div>
