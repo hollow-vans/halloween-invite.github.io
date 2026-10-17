@@ -551,6 +551,8 @@
 		<div class="team-name display">Points</div>
 		<ul id="pointsList" class="points-list"></ul>
 		<button id="rulesBack" class="back-btn">Back</button>
+		<div class="newline"></div>
+		<div class="newline"></div>
 	</div>
 	
 
@@ -567,11 +569,12 @@
 	const GUESTS = {
 	// ...add one entry per guest with their own unique 4-digit code
 	"1398": { name: "Vanessa", team: " Ghost Host", roster: ["Vanessa"] },
-	"4728": { name: "Selina", team: " The Black Cats", roster: ["Selina","Amber","Dennis","Diego","Jamil"] },
-	"2237": { name: "Amber", team: " The Black Cats", roster: ["Amber","Dennis","Diego","Jamil","Selina"] },
-	"5925": { name: "Diego", team: " The Black Cats", roster: ["Diego","Amber","Dennis","Jamil","Selina"] },
-	"8794": { name: "Jamil", team: " The Black Cats", roster: ["Jamil","Amber","Dennis","Diego","Jamil"] },
-	"3939": { name: "Dennis", team: " The Black Cats", roster: ["Dennis","Amber","Diego","Jamil","Selina"] },
+	"2661": { name: "Dalia", team: " The Black Cats", roster: ["Dalia","Amber","Dennis","Diego","Jamil","Selina"] },
+	"4728": { name: "Selina", team: " The Black Cats", roster: ["Selina","Amber","Dalia","Dennis","Diego","Jamil"] },
+	"2237": { name: "Amber", team: " The Black Cats", roster: ["Amber","Dalia","Dennis","Diego","Jamil","Selina"] },
+	"5925": { name: "Diego", team: " The Black Cats", roster: ["Diego","Amber","Dalia","Dennis","Jamil","Selina"] },
+	"8794": { name: "Jamil", team: " The Black Cats", roster: ["Jamil","Amber","Dalia","Dennis","Diego","Jamil"] },
+	"3939": { name: "Dennis", team: " The Black Cats", roster: ["Dennis","Amber","Dalia","Diego","Jamil","Selina"] },
 	"7625": { name: "Marisol", team: " The Bloodhounds", roster: ["Marisol","Johnathan S","Juan","Lily","Ricky"] },
 	"8339": { name: "Lily", team: " The Bloodhounds", roster: ["Lily","Johnathan S","Juan","Marisol","Ricky"] },
 	"1355": { name: "Juan", team: " The Bloodhounds", roster: ["Juan","Johnathan S","Lily","Marisol","Ricky"] },
@@ -583,11 +586,12 @@
 	"3985": { name: "Nathalie R", team: " The Dead Society", roster: ["Nathalie R","Alex","Chel","Evelyn","Luis","Xavier"] },
 	"5716": { name: "Chel", team: " The Dead Society", roster: ["Chel","Alex","Evelyn","Luis","Nathalie R","Xavier"] },
 	"5265": { name: "Luis", team: " The Dead Society", roster: ["Luis","Alex","Chel","Evelyn","Nathalie R","Xavier"] },
-	"2806": { name: "Adrian", team: " The Skeleton Crew", roster: ["Adrian","Iris","Isaac","Kathya","Yvonne"] },
-	"4635": { name: "Iris", team: " The Skeleton Crew", roster: ["Iris","Adrian","Isaac","Kathya","Yvonne"] },
-	"7870": { name: "Isaac", team: " The Skeleton Crew", roster: ["Isaac","Adrian","Iris","Kathya","Yvonne"] },
-	"9919": { name: "Yvonne", team: " The Skeleton Crew", roster: ["Yvonne","Adrian","Iris","Isaac","Kathya"] },
-	"9852": { name: "Kathya", team: " The Skeleton Crew", roster: ["Kathya","Adrian","Iris","Isaac","Yvonne"] },
+	"4982": { name: "Javier", team: " The Skeleton Crew", roster: ["Javier","Adrian","Iris","Isaac","Kathya","Yvonne"] },
+	"2806": { name: "Adrian", team: " The Skeleton Crew", roster: ["Adrian","Iris","Isaac","Javier","Kathya","Yvonne"] },
+	"4635": { name: "Iris", team: " The Skeleton Crew", roster: ["Iris","Adrian","Isaac","Javier","Kathya","Yvonne"] },
+	"7870": { name: "Isaac", team: " The Skeleton Crew", roster: ["Isaac","Adrian","Iris","Javier","Kathya","Yvonne"] },
+	"9919": { name: "Yvonne", team: " The Skeleton Crew", roster: ["Yvonne","Adrian","Iris","Isaac","Javier","Kathya"] },
+	"9852": { name: "Kathya", team: " The Skeleton Crew", roster: ["Kathya","Adrian","Iris","Isaac","Javier","Yvonne"] },
 	"1774": { name: "Omar", team: " The Trick or Treaters", roster: ["Omar","Daniel","Gaby","Jonathan O","Nau"] },
 	"9969": { name: "Nau", team: " The Trick or Treaters", roster: ["Nau","Daniel","Gaby","Jonathan O","Omar"] },
 	"1233": { name: "Jonathan O", team: " The Trick or Treaters", roster: ["Jonathan O","Daniel","Gaby","Nau","Omar"] },
@@ -628,9 +632,9 @@
 	EDIT GAME # to the game name when ready to reveal.
 	============================================================ */
 	const GAMES = [
-	{ name: "Bones", rules: ["Teams stand at their assigned tables, bones are scattered across each one.", "Players creep around the table while music plays. When the music stops, players must grab a bone from the table.", "Players who do not grab a bone are Eliminated.", "Two bones are removed from the table before the next round beings. Repeat until last player standing."],
+	{ name: "Bones", rules: ["Teams stand at their assigned tables, bones are scattered across each table.", "Players creep around the table while music plays. When the music stops, players must grab a bone from the table.", "Players who do not grab a bone are Eliminated.", "Two bones are removed from the table before the next round beings.", "Repeat until last player standing."],
 	points: [
-	{ place: "1st Place", description: "100 points awarded to the first winning team. \nAn additional 50 points awarded to the individual player." },
+	{ place: "1st Place", description: "100 points awarded to the first winning team.", "An additional 50 points awarded to the individual player." },
 	{ place: "2nd Place", description: "75 points awarded to the second winning team. \nAn additional 40 points awarded to the individual player." },
 	{ place: "3rd Place", description: "50 points awarded to the third winning team. \nAn additional 30 points awarded to the individual player." }
 	] },
@@ -640,13 +644,13 @@
 	{ place: "2nd Place", description: "75 points awarded to the second winning team. \nAn additional 40 points awarded to the individual Mummy." },
 	{ place: "3rd Place", description: "50 points awarded to the third winning team. \nAn additional 30 points awarded to the individual Mummy." }
 	] },
-	{ name: "Corner of Death", rules: ["Four corners are identified as 'Corners of Death'.", "Players are given 10 seconds to stand in a corner.", "A random corner is chosen as the Corner of Death.", "All players in the Corner of Death are Eliminated.", "Repeat until last player standing."],
+	{ name: "Corner of Death", rules: ["Four corners are assigned as 'Corners of Death'.", "Players are given 10 seconds to stand in a corner.", "A corner is chosen at random to be the Corner of Death.", "All players in the Corner of Death are Eliminated.", "Repeat until last player standing."],
 	points: [
 	{ place: "1st Place", description: "100 points awarded to the first winning team. \nAn additional 50 points awarded to the individual player." },
 	{ place: "2nd Place", description: "75 points awarded to the second winning team. \nAn additional 40 points awarded to the individual player." },
 	{ place: "3rd Place", description: "50 points awarded to the third winning team. \nAn additional 30 points awarded to the individual player." }
 	] },
-	{ name: "Movie Trivia", rules: ["Trivia will have 12 Rounds total: 4 Rounds for each movie.", "At the start of each Round, each team selects 2 players to buzz in and answer the Round question.", "The first team to buzz in will answer first. If they answer incorrectly, the next team has a chance to answer, and so on. \nTeam who answers correctly earns all points for that Round.", "The next Round begins with 2 new players per team. Players cannot be chosen for 2 consecutive Rounds."],
+	{ name: "Movie Trivia", rules: ["Trivia will have 12 Rounds total: 4 Rounds for each movie.", "At the start of each Round, each team selects 2 players to buzz in and answer the Round question.", "The first team to buzz in will answer first. If they answer incorrectly, the next team has a chance to answer, and so on. Team who answers correctly earns all points for that Round.", "The next Round begins with 2 new players per team. Players cannot be chosen for 2 consecutive Rounds."],
 	points: [
 	{ place: "1st Place", description: "200 points awarded to the first winning team." },
 	{ place: "2nd Place", description: "150 points awarded to the second winning team." },
