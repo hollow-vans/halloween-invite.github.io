@@ -550,6 +550,9 @@
 		<div class="divider"></div>
 		<div class="team-name display">Points</div>
 		<ul id="pointsList" class="points-list"></ul>
+		<div id="rulesLinkWrap" style="display:none; margin-bottom:28px;">
+			<a id="rulesLink" class="theme-link" href="#" target="_blank" rel="noopener"></a>
+		</div>
 		<button id="rulesBack" class="back-btn">Back</button>
 		<div class="newline"></div>
 		<div class="newline"></div>
@@ -611,6 +614,7 @@
 	const SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1kW8hWA10BKXkQwlsXiq55qwD-PBtSUJ5NzBVbqKysrY/edit?usp=sharing";
 	const RSVP_URL = "https://forms.gle/bf6wso9T6ZJEYCvVA";
 	const SCOREBOARD_URL = "https://datastudio.google.com/u/0/reporting/44ae2629-af98-4be9-a498-48dddccfd6ff/page/9sq4F";
+	const BUZZER_URL = "https://buzzin.live/play";
 
 	/* ============================================================
 	EDIT: the three movies for trivia night. Add an image file for each in the same folder as this HTML file.
@@ -625,6 +629,7 @@
 	document.getElementById('sheetLink').href = SPREADSHEET_URL;
 	document.getElementById('rsvpLink').href = RSVP_URL;
 	document.getElementById('scoreboardLink').href = SCOREBOARD_URL;
+	document.getElementById('buzzerLink').href = BUZZER_URL;
 
 	/* ============================================================
 	EDIT: the games and their rules. "name" is the label guests
@@ -650,7 +655,8 @@
 	{ place: "2nd Place", description: "75 points awarded to the second winning team. An additional 40 points awarded to the individual player." },
 	{ place: "3rd Place", description: "50 points awarded to the third winning team. An additional 30 points awarded to the individual player." }
 	] },
-	{ name: "Movie Trivia", rules: ["Trivia will have 12 Rounds total: 4 Rounds for each movie.", "At the start of each Round, each team selects 2 players to buzz in and answer the Round question.", "The first team to buzz in will answer first. If they answer incorrectly, the next team has a chance to answer, and so on. Team who answers correctly earns all points for that Round.", "The next Round begins with 2 new players per team. Players cannot be chosen for 2 consecutive Rounds."],
+	{ name: "Movie Trivia", link: BUZZER_URL, label: "Buzzer",
+	rules: ["Trivia will have 12 Rounds total: 4 Rounds for each movie.", "At the start of each Round, each team selects 2 players to buzz in and answer the Round question.", "The first team to buzz in will answer first. If they answer incorrectly, the next team has a chance to answer, and so on. Team who answers correctly earns all points for that Round.", "The next Round begins with 2 new players per team. Players cannot be chosen for 2 consecutive Rounds."],
 	points: [
 	{ place: "1st Place", description: "200 points awarded to the first winning team." },
 	{ place: "2nd Place", description: "150 points awarded to the second winning team." },
@@ -679,6 +685,15 @@
 	function openRules(game){
 	document.getElementById('reveal').classList.remove('active');
 	rulesTitleEl.textContent = game.name;
+	const linkWrap = document.getElementById('rulesLinkWrap');
+	const linkEl = document.getElementById('rulesLink');
+	if(game.link){
+	linkEl.href = game.link.url;
+	linkEl.textContent = game.link.label || 'Open Link';
+	linkWrap.style.display = 'block';
+	} else {
+	linkWrap.style.display = 'none';
+	}
 	rulesListEl.innerHTML = '';
 	game.rules.forEach(text=>{
 	const li = document.createElement('li');
