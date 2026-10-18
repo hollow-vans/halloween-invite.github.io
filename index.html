@@ -551,7 +551,7 @@
 		<div class="team-name display">Points</div>
 		<ul id="pointsList" class="points-list"></ul>
 		<div id="rulesLinkWrap" style="display:none; margin-bottom:28px;">
-			<a id="rulesLink" class="theme-link" href="#" target="_blank" rel="noopener"></a>
+			<a id="buzzerlink" class="theme-link" href="#" target="_blank" rel="noopener"></a>
 		</div>
 		<button id="rulesBack" class="back-btn">Back</button>
 		<div class="newline"></div>
@@ -686,7 +686,7 @@
 	document.getElementById('reveal').classList.remove('active');
 	rulesTitleEl.textContent = game.name;
 	const linkWrap = document.getElementById('rulesLinkWrap');
-	const linkEl = document.getElementById('rulesLink');
+	const linkEl = document.getElementById('buzzerlink');
 	if(game.link){
 	linkEl.href = game.link.url;
 	linkEl.textContent = game.link.label || 'Open Link';
